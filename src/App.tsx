@@ -1,8 +1,9 @@
 import { ToastContainer } from "react-toastify";
-import { AuthProvider } from "./providers/AuthProvider";
+
 import { RouterMain } from "./routes";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import "react-toastify/dist/ReactToastify.css";
+import { MainProvider } from "./providers";
 function App() {
   return (
     <>
@@ -19,9 +20,9 @@ function App() {
         pauseOnHover={false}
         theme="light"
       />
-      <AuthProvider>
+      <MainProvider>
         <RouterMain />
-      </AuthProvider>
+      </MainProvider>
     </>
   );
 }
