@@ -1,5 +1,7 @@
+import { RouterMain } from "./routes";
+
 function App() {
-  return <h1>Main</h1>;
+  return <RouterMain />;
 }
 
 export default App;
