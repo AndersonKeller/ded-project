@@ -1,6 +1,7 @@
 import { Aside } from "../../components/Aside";
 import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
+import { RaceCard } from "../../components/RaceCard";
 import { useAuth } from "../../hooks/useAuth";
 
 export function Home() {
@@ -13,6 +14,7 @@ export function Home() {
         {!loading ? (
           <>
             <Aside />
+            <RaceCard />
           </>
         ) : (
           <div>carregando...</div>
