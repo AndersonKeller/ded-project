@@ -1,21 +1,32 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { LoginData } from "../pages/Login/validator";
 import { api } from "../services/api";
-
+import { useNavigate } from "react-router-dom";
+import { Race } from "./RacesProvider";
+interface Classe {
+  name: string;
+}
 interface AuthProviderProps {
   children: ReactNode;
+}
+interface Char {
+  name: string;
+  classe: Classe;
+  race: Race;
 }
 interface AuthContextValues {
   signIn: (data: LoginData) => void;
   loading: boolean;
+  chars: Char[];
+  setChars: React.Dispatch<React.SetStateAction<Char[]>>;
 }
 export const AuthContext = createContext<AuthContextValues>(
   {} as AuthContextValues
 );
 export function AuthProvider({ children }: AuthProviderProps) {
-  //const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [chars, setChars] = useState([]);
+  const [chars, setChars] = useState([] as Char[]);
   async function signIn(data: LoginData) {
     try {
       const response = await api.post("/login", data);
@@ -25,7 +36,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       localStorage.setItem("ded-project:token", token);
       retriveChars();
-      //navigate("dashboard");
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
@@ -50,10 +61,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     api.defaults.headers.common.authorization = `Bearer ${token}`;
     retriveChars();
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1400);
   }, []);
   return (
-    <AuthContext.Provider value={{ signIn, loading }}>
+    <AuthContext.Provider value={{ signIn, loading, chars, setChars }}>
       {children}
     </AuthContext.Provider>
   );

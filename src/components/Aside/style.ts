@@ -8,7 +8,7 @@ export const StyledAside = styled.aside`
   top: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   color: var(--color-text);
   text-align: center;
   height: 100vh;
@@ -21,8 +21,9 @@ export const StyledAside = styled.aside`
   }
   h2 {
     width: max-content;
+    font-size: 1rem;
   }
-  button {
+  .btn-aside {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,8 +33,8 @@ export const StyledAside = styled.aside`
     border: 4px double var(--color-red-50);
     cursor: pointer;
   }
-  button:hover,
-  button:focus {
+  .btn-aside:hover,
+  .btn-aside:focus {
     transform: scale(0.9);
     background-color: var(--color-black);
     h2 {
@@ -41,7 +42,7 @@ export const StyledAside = styled.aside`
       font-weight: 800;
     }
   }
-  button:focus {
+  .btn-aside:focus {
     background-color: var(--color-red);
   }
   small {

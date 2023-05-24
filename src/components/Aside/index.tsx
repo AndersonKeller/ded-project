@@ -1,24 +1,44 @@
-import { Race } from "../../providers/RacesProvider";
+import { useContext } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { RaceContext } from "../../providers/RacesProvider";
 import { StyledAside } from "./style";
-interface AsideProps {
-  title: string;
-  list: Race[];
-}
+import { StyledButton } from "../Button/Button";
 
-export function Aside({ title, list }: AsideProps) {
+export function Aside() {
+  const { chars } = useAuth();
+  const { races } = useContext(RaceContext);
   return (
-    <>
-      <StyledAside>
-        <h2>{title}</h2>
+    <StyledAside>
+      {chars.length > 0 ? (
+        <>
+          <h2>CHOOSE YOUR CHAR</h2>
+          <StyledButton>CREATE</StyledButton>
+          {chars.map((item, index) => {
+            return (
+              <>
+                <button className="btn-aside" key={index}>
+                  <h2>{item.name}</h2>
+                </button>
+                <p>
+                  {item.race.name}/{item.classe.name}
+                </p>
+              </>
+            );
+          })}
+        </>
+      ) : (
+        <>
+          <h2>CHOOSE YOUR RACE</h2>
 
-        {list.map((item, index) => {
-          return (
-            <button key={index}>
-              <h2>{item.name}</h2>
-            </button>
-          );
-        })}
-      </StyledAside>
-    </>
+          {races.map((item, index) => {
+            return (
+              <button className="btn-aside" key={index}>
+                <h2>{item.name}</h2>
+              </button>
+            );
+          })}
+        </>
+      )}
+    </StyledAside>
   );
 }
