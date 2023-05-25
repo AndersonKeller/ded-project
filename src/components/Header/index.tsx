@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { StyledHeader } from "./style";
-import { StyledButton } from "../Button/Button";
+import { Button } from "../Button";
 
 export function Header() {
   const navigate = useNavigate();
@@ -17,9 +17,9 @@ export function Header() {
     <StyledHeader>
       <h1>GODS & MYTHOLOGIES</h1>
       <nav>
-        <StyledButton onClick={goToHome}>HOME</StyledButton>
-        <StyledButton onClick={goToLogin}>LOGIN</StyledButton>
-        <StyledButton onClick={goToRegister}>REGISTRAR</StyledButton>
+        <Button onClick={goToHome} label="HOME" />
+        <Button onClick={goToLogin} label="LOGIN" />
+        <Button onClick={goToRegister} label="REGISTER" />
       </nav>
     </StyledHeader>
   );

@@ -1,15 +1,23 @@
 import { useContext, useEffect, useState } from "react";
-import { StyledImg, StyledRaceCard } from "./styles";
+import {
+  StyledImg,
+  StyledName,
+  StyledRaceCard,
+  StyledStatsCard,
+} from "./styles";
 import { RaceContext } from "../../providers/RacesProvider";
+import { Button } from "../Button";
 
 export function RaceCard() {
   const { selectRace } = useContext(RaceContext);
-
+  const [chooseEffect, setChooseEffect] = useState(false);
+  function setMyRace() {
+    setChooseEffect(!chooseEffect);
+  }
   return (
-    <StyledRaceCard>
+    <>
       {selectRace.name ? (
-        <>
-          <p>{selectRace.name}</p>
+        <StyledRaceCard className={chooseEffect ? "transform-left" : ""}>
           <ul>
             <li>
               STR: <p className="strength-stats">{selectRace.stats.strength}</p>
@@ -27,12 +35,55 @@ export function RaceCard() {
           </ul>
 
           <StyledImg loading="lazy" src={selectRace.image} alt="" />
-        </>
+        </StyledRaceCard>
       ) : (
         <div>
           <p>Escolha uma classe</p>
         </div>
       )}
-    </StyledRaceCard>
+
+      {selectRace.name && (
+        <StyledStatsCard className={chooseEffect ? "transform-rigth" : ""}>
+          <h3>START STATS</h3>
+          <StyledName className={chooseEffect ? "transform-btn" : ""}>
+            {selectRace.name}
+          </StyledName>
+          <Button
+            className={chooseEffect ? "transform-btn" : ""}
+            onClick={setMyRace}
+            label="CHOOSE"
+          />
+          <div className="infos-race-div">
+            {" "}
+            <ul>
+              {Object.keys(selectRace.stats).map((stat, index) => {
+                return (
+                  <li className="stat-name" key={index}>
+                    {stat} :
+                  </li>
+                );
+              })}
+            </ul>
+            <ul>
+              {Object.values(selectRace.stats).map((value, index) => {
+                if (value < 1 && value > 0) {
+                  return (
+                    <li className="stat-value" key={index}>
+                      {value}%
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li className="stat-value" key={index}>
+                      {value}
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+          </div>
+        </StyledStatsCard>
+      )}
+    </>
   );
 }

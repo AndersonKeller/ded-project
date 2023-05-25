@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { Race, RaceContext } from "../../providers/RacesProvider";
 import { StyledAside } from "./style";
-import { StyledButton } from "../Button/Button";
+import { Button } from "../Button";
 import human from "../../assets/human.png";
 import dwarf from "../../assets/dwarf.png";
 import elf from "../../assets/elf.png";
@@ -10,7 +10,7 @@ import gnome from "../../assets/gnome.png";
 import dragonBorn from "../../assets/dragonborn.png";
 export function Aside() {
   const { chars } = useAuth();
-  const { races, selectRace, setSelectRace } = useContext(RaceContext);
+  const { races, setSelectRace } = useContext(RaceContext);
   function defineRace(race: Race) {
     console.log(race);
     const raceNew: Race = setImages(race);
@@ -39,7 +39,7 @@ export function Aside() {
       {chars.length > 0 ? (
         <>
           <h2>CHOOSE YOUR CHAR</h2>
-          <StyledButton>CREATE</StyledButton>
+          <Button label="CREATE" />
           {chars.map((item, index) => {
             return (
               <>
