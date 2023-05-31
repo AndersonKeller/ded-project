@@ -1,6 +1,7 @@
 import { Aside } from "../../components/Aside";
 import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
+import { Loading } from "../../components/Loading";
 import { RaceCard } from "../../components/RaceCard";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -17,7 +18,7 @@ export function Home() {
             <RaceCard />
           </>
         ) : (
-          <div>carregando...</div>
+          <Loading />
         )}
       </Container>
     </>

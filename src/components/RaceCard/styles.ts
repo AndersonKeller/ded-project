@@ -25,11 +25,22 @@ export const StyledRaceCard = styled.section`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  transition: all 1s ease;
+  transition: all 2s ease;
+  animation: onSection 2s ease;
   p,
   h3,
   li {
     color: var(--color-text);
+  }
+  @keyframes onSection {
+    0% {
+      opacity: 0;
+      margin-top: 50px;
+    }
+    100% {
+      opacity: 1;
+      margin-top: 0;
+    }
   }
   ul {
     display: flex;
@@ -41,6 +52,9 @@ export const StyledRaceCard = styled.section`
     width: 250px;
     position: relative;
     transition: all 1s ease;
+  }
+  .div-not-select {
+    width: 100%;
   }
   .div-stats-li {
     display: flex;
@@ -133,6 +147,8 @@ export const StyledStatsCard = styled.section`
   align-items: flex-start;
   justify-content: center;
   position: relative;
+  animation: onSection 2s ease;
+  
   h3,
   p,
   li {
@@ -186,5 +202,14 @@ export const StyledStatsCard = styled.section`
       right: 100px;
       border-left: none;
     }
+  }
+`;
+export const StyledNotSelect = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 32px;
+  p {
+    color: var(--color-text);
+    font-size: 1.5rem;
   }
 `;

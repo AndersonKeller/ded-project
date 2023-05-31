@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import {
   StyledImg,
   StyledName,
+  StyledNotSelect,
   StyledRaceCard,
   StyledStatsCard,
 } from "./styles";
@@ -37,9 +38,9 @@ export function RaceCard() {
           <StyledImg loading="lazy" src={selectRace.image} alt="" />
         </StyledRaceCard>
       ) : (
-        <div>
-          <p>Escolha uma classe</p>
-        </div>
+        <StyledNotSelect>
+          <p>SELECT A RACE</p>
+        </StyledNotSelect>
       )}
 
       {selectRace.name && (
@@ -55,7 +56,7 @@ export function RaceCard() {
           />
           <div className="infos-race-div">
             {" "}
-            <ul>
+            <ul className="card-info">
               {Object.keys(selectRace.stats).map((stat, index) => {
                 return (
                   <li className="stat-name" key={index}>
