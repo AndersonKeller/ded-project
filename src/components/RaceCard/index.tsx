@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import {
   StyledImg,
   StyledName,
@@ -8,6 +8,7 @@ import {
 } from "./styles";
 import { RaceContext } from "../../providers/RacesProvider";
 import { Button } from "../Button";
+import { StatsCard } from "../Stats";
 
 export function RaceCard() {
   const { selectRace } = useContext(RaceContext);
@@ -55,33 +56,7 @@ export function RaceCard() {
             label="CHOOSE"
           />
           <div className="infos-race-div">
-            {" "}
-            <ul className="card-info">
-              {Object.keys(selectRace.stats).map((stat, index) => {
-                return (
-                  <li className="stat-name" key={index}>
-                    {stat} :
-                  </li>
-                );
-              })}
-            </ul>
-            <ul>
-              {Object.values(selectRace.stats).map((value, index) => {
-                if (value < 1 && value > 0) {
-                  return (
-                    <li className="stat-value" key={index}>
-                      {value}%
-                    </li>
-                  );
-                } else {
-                  return (
-                    <li className="stat-value" key={index}>
-                      {value}
-                    </li>
-                  );
-                }
-              })}
-            </ul>
+            <StatsCard stats={selectRace.stats} />
           </div>
         </StyledStatsCard>
       )}

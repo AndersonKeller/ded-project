@@ -25,7 +25,7 @@ export const GlobalStyles = createGlobalStyle`
         --color-gray-300: #e0e0e0;
         --color-gray-200: #eeeeee;
         --color-gray-100: #f5f5f5;
-        --fix-white: #fff;
+        --fix-white: #e0e0e0;
 
         --font-family: 'Alkatra', cursive;
     }

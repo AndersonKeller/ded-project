@@ -148,30 +148,18 @@ export const StyledStatsCard = styled.section`
   justify-content: center;
   position: relative;
   animation: onSection 2s ease;
-  
+
   h3,
-  p,
-  li {
+  p {
     color: var(--color-text);
   }
   .infos-race-div {
     display: flex;
     position: absolute;
-    bottom: 10px;
+    bottom: 80px;
+    width: 50%;
   }
-  .stat-name {
-    color: var(--fix-white);
-  }
-  .stat-value {
-    color: var(--color-red-50);
-    margin-left: 16px;
-  }
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 16px;
-  }
+
   button {
     position: fixed;
     left: -50px;
