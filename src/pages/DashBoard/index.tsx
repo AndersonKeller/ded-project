@@ -1,21 +1,20 @@
 import { useContext } from "react";
 import { RaceContext } from "../../providers/RacesProvider";
 import { Header } from "../../components/Header";
-import { Container } from "../../components/Container";
-import { ClassesContext } from "../../providers/ClassesProvider";
+
+import { ContainerDash } from "./style";
+import { ClasseCard } from "../../components/ClasseCard";
 
 export function DashBoard() {
   const { selectRace } = useContext(RaceContext);
-  const { classes, setSelectClasse } = useContext(ClassesContext);
-  console.log(selectRace);
+
   return (
     <>
       <Header />
-      <Container>
-        {classes.map((cl, index) => {
-          return <p key={index}>{cl.name}</p>;
-        })}
-      </Container>
+      <ContainerDash>
+        <h3>RACE: {selectRace.name}</h3>
+        <ClasseCard />
+      </ContainerDash>
     </>
   );
 }

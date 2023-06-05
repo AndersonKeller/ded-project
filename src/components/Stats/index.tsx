@@ -25,8 +25,12 @@ export function StatsCard({ stats }: StatsProps) {
       <div className="circle"></div>
       <div className="circle"></div>
       <StyledStatsUl className="card__texture">
-        {statName.map((name) => {
-          return <li className="li-name-stat">{name}</li>;
+        {statName.map((name, index) => {
+          return (
+            <li key={index} className="li-name-stat">
+              {name}
+            </li>
+          );
         })}
         {statValue.map((value) => {
           return (
