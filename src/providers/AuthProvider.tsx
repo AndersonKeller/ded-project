@@ -3,6 +3,7 @@ import { LoginData } from "../pages/Login/validator";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { Race } from "./RacesProvider";
+import { RegisterData } from "../pages/Register/validator";
 interface Classe {
   name: string;
 }
@@ -16,6 +17,7 @@ interface Char {
 }
 interface AuthContextValues {
   signIn: (data: LoginData) => void;
+  createUser: (data: RegisterData) => void;
   loading: boolean;
   chars: Char[];
   setChars: React.Dispatch<React.SetStateAction<Char[]>>;
@@ -50,6 +52,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
       console.log(error);
     }
   }
+  async function createUser(data: RegisterData) {
+    try {
+      await api.post("/users", data);
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     const token = localStorage.getItem("ded-project:token");
 
@@ -66,7 +77,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, 1400);
   }, []);
   return (
-    <AuthContext.Provider value={{ signIn, loading, chars, setChars }}>
+    <AuthContext.Provider
+      value={{ createUser, signIn, loading, chars, setChars }}
+    >
       {children}
     </AuthContext.Provider>
   );

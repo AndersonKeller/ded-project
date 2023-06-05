@@ -44,7 +44,7 @@ export function Aside() {
             return (
               <>
                 <button className="btn-aside" key={index}>
-                  <h2>{item.name}</h2>
+                  <h2 key={index}>{item.name}</h2>
                 </button>
                 <p>
                   {item.race.name}/{item.classe.name}

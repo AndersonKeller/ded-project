@@ -6,15 +6,21 @@ import {
   StyledRaceCard,
   StyledStatsCard,
 } from "./styles";
-import { RaceContext } from "../../providers/RacesProvider";
+import { Race, RaceContext } from "../../providers/RacesProvider";
 import { Button } from "../Button";
 import { StatsCard } from "../Stats";
+import { useNavigate } from "react-router-dom";
 
 export function RaceCard() {
-  const { selectRace } = useContext(RaceContext);
+  const navigate = useNavigate();
+  const { selectRace, setSelectRace } = useContext(RaceContext);
   const [chooseEffect, setChooseEffect] = useState(false);
-  function setMyRace() {
+  function setMyRace(race: Race) {
     setChooseEffect(!chooseEffect);
+    setSelectRace(race);
+    setTimeout(() => {
+      navigate("dashboard");
+    }, 2000);
   }
   return (
     <>
@@ -52,7 +58,7 @@ export function RaceCard() {
           </StyledName>
           <Button
             className={chooseEffect ? "transform-btn" : ""}
-            onClick={setMyRace}
+            onClick={() => setMyRace(selectRace)}
             label="CHOOSE"
           />
           <div className="infos-race-div">

@@ -3,10 +3,15 @@ interface ButtonProps {
   label: string;
   onClick?: () => void;
   className?: string;
+  type?: "button" | "submit";
 }
-export function Button({ label, onClick, className }: ButtonProps) {
+export function Button({ label, onClick, className, type }: ButtonProps) {
   return (
-    <StyledButton className={className} onClick={onClick}>
+    <StyledButton
+      type={type ? type : "button"}
+      className={className}
+      onClick={onClick}
+    >
       {label}
     </StyledButton>
   );
