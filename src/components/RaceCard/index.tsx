@@ -52,7 +52,6 @@ export function RaceCard() {
 
       {selectRace.name && (
         <StyledStatsCard className={chooseEffect ? "transform-rigth" : ""}>
-          <h3>START STATS</h3>
           <StyledName className={chooseEffect ? "transform-btn" : ""}>
             {selectRace.name}
           </StyledName>
@@ -62,7 +61,8 @@ export function RaceCard() {
             label="CHOOSE"
           />
           <div className="infos-race-div">
-            <StatsCard stats={selectRace.stats} />
+            <h3>START STATS</h3>
+            <p>{selectRace.description}</p>
           </div>
         </StyledStatsCard>
       )}

@@ -155,9 +155,10 @@ export const StyledStatsCard = styled.section`
   }
   .infos-race-div {
     display: flex;
-    position: absolute;
-    bottom: 80px;
-    width: 50%;
+    flex-direction: column;
+    text-align: center;
+    width: 60%;
+    padding: 22px 0;
   }
 
   button {

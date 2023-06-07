@@ -94,4 +94,10 @@ export const StyledContainerClasses = styled.div`
   width: 70%;
   margin: 0 auto;
   justify-content: space-between;
+  section {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
 `;

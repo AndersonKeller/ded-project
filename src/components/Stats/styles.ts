@@ -4,7 +4,7 @@ export const StyledStatsUl = styled.ul`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 12px 22px;
+  padding: 22px;
   justify-content: center;
   align-items: center;
   width: inherit;
@@ -28,10 +28,14 @@ export const StyledStatsUl = styled.ul`
     color: var(--fix-white);
     text-align: right;
   }
+  h3 {
+    position: absolute;
+    top: 0;
+  }
 `;
 export const StyledCardStatsHover = styled.div`
   width: 100%;
-  height: 326px;
+  height: 400px;
   transition: all 0.2s;
   position: relative;
   transform: translate3d(0, 0, 0);
