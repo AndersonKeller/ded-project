@@ -4,13 +4,14 @@ import { StyledCardStatsHover, StyledStatsUl } from "./styles";
 import { ClassesContext } from "../../providers/ClassesProvider";
 
 interface StatsProps {
-  stats: Stats;
+  stats?: Stats;
   name: string;
 }
 export function StatsCard({ stats, name }: StatsProps) {
   const { classes } = useContext(ClassesContext);
   const [statName, setStatName] = useState([] as string[]);
   const [statValue, setStatValue] = useState([] as string[]);
+
   function toArray() {
     const keys = Object.keys(stats ? stats : classes[0].stats);
     const values = Object.values(stats ? stats : classes[0].stats);

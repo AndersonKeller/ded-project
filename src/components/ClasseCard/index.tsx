@@ -11,11 +11,16 @@ import {
 import { StatsCard } from "../Stats";
 import { Button } from "../Button";
 import { Race, RaceContext } from "../../providers/RacesProvider";
-
+import { ModalCharCreate } from "../ModalCharCreate";
+export interface CharCreate {
+  char: { race: Race; classe: Classe };
+}
 export function ClasseCard() {
   const { classes } = useContext(ClassesContext);
   const { selectRace } = useContext(RaceContext);
   const [hoverClasse, setHoverClasse] = useState<Classe>({} as Classe);
+  const [modalCreate, setModalCreate] = useState(false);
+  const [char, setChar] = useState({} as CharCreate);
   function hover(classe: Classe) {
     console.log(classe);
     setHoverClasse(classe);
@@ -23,6 +28,9 @@ export function ClasseCard() {
   function defineChar() {
     const classe: Classe = hoverClasse;
     const race: Race = selectRace;
+
+    setChar({ char: { classe: classe, race: race } });
+    setModalCreate(true);
   }
   return (
     <StyledContainerClasses>
@@ -47,8 +55,14 @@ export function ClasseCard() {
       </StyledCardClasse>
       <section>
         <StatsCard name={hoverClasse.name} stats={hoverClasse.stats} />
-        <Button label="select" type="button" onClick={defineChar} />
+        <Button
+          disabled={!hoverClasse.name ? true : false}
+          label="select"
+          type="button"
+          onClick={defineChar}
+        />
       </section>
+      {modalCreate && <ModalCharCreate char={char.char} />}
     </StyledContainerClasses>
   );
 }
