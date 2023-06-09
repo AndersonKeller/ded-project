@@ -15,12 +15,25 @@ interface Char {
   classe: Classe;
   race: Race;
 }
+interface User {
+  name: string;
+  email: string;
+  admin: boolean;
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
 interface AuthContextValues {
   signIn: (data: LoginData) => void;
   createUser: (data: RegisterData) => void;
   loading: boolean;
   chars: Char[];
   setChars: React.Dispatch<React.SetStateAction<Char[]>>;
+  user: User;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
+  notUser: boolean;
+  setNotUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const AuthContext = createContext<AuthContextValues>(
   {} as AuthContextValues
@@ -29,6 +42,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [chars, setChars] = useState([] as Char[]);
+  const [user, setUser] = useState({} as User);
+  const [notUser, setNotUser] = useState(false);
   async function signIn(data: LoginData) {
     try {
       const response = await api.post("/login", data);
@@ -37,6 +52,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       localStorage.setItem("ded-project:token", token);
+      const retrive = await api.get("/users/retrive");
+      setUser(retrive.data);
       retriveChars();
       navigate("/");
     } catch (error) {
@@ -78,7 +95,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
   return (
     <AuthContext.Provider
-      value={{ createUser, signIn, loading, chars, setChars }}
+      value={{
+        createUser,
+        signIn,
+        loading,
+        chars,
+        setChars,
+        user,
+        setUser,
+        notUser,
+        setNotUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

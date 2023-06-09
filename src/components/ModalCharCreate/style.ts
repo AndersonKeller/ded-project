@@ -16,8 +16,21 @@ export const StyledModalCharCreate = styled.div`
     height: max-content;
     background-color: var(--fix-white);
     border-radius: 16px;
+    position: relative;
+    .close-modal {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: transparent;
+      font-weight: 700;
+      z-index: 1;
+    }
   }
   form {
     background-color: var(--color-gray-900);
+    h3 {
+      color: var(--color-text);
+      align-self: baseline;
+    }
   }
 `;

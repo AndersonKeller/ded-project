@@ -37,9 +37,9 @@ export function StatsCard({ stats, name }: StatsProps) {
             </li>
           );
         })}
-        {statValue.map((value) => {
+        {statValue.map((value, index) => {
           return (
-            <li className="li-value-stat">
+            <li key={index} className="li-value-stat">
               {parseFloat(value) > 0 && parseFloat(value) < 1
                 ? value + "%"
                 : value}

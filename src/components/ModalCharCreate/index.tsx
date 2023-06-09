@@ -8,8 +8,21 @@ import { Form } from "../Form";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { api } from "../../services/api";
+import { useAuth } from "../../hooks/useAuth";
+import { ModalErrorUser } from "../ModalErrorUser";
+import { useEffect } from "react";
+interface ModalCharCreateProps {
+  char: CharCreate;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+export function ModalCharCreate({
+  char,
+  isOpen,
+  setIsOpen,
+}: ModalCharCreateProps) {
+  const { user, notUser, setNotUser } = useAuth();
 
-export function ModalCharCreate({ char }: CharCreate) {
   const {
     register,
     handleSubmit,
@@ -18,26 +31,43 @@ export function ModalCharCreate({ char }: CharCreate) {
     resolver: zodResolver(schema),
   });
   async function createChar(data: CharData) {
-    data.classe = char.classe.name;
-    data.race = char.race.name;
-    console.log(data);
-    try {
-      const response = await api.post("/chars", data);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    console.log(notUser);
+    if (!user.name) {
+      setNotUser(true);
+    } else {
+      data.classe = char.char.classe.name;
+      data.race = char.char.race.name;
+      console.log(data);
+      try {
+        const response = await api.post("/chars", data);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
-  return (
+  function close() {
+    setIsOpen(!isOpen);
+  }
+  useEffect(() => {
+    setNotUser(false);
+  }, []);
+  return isOpen ? (
     <StyledModalCharCreate>
       <section>
+        <button className="close-modal" onClick={close}>
+          &larr; Back to Select
+        </button>
         <Form onSubmit={handleSubmit(createChar)}>
-          <h3>RACE: {char.race.name}</h3>
-          <h3>CLASSE: {char.classe.name}</h3>
+          <h3>RACE: {char.char.race.name}</h3>
+          <h3>CLASSE: {char.char.classe.name}</h3>
           <Input label="Name" register={register("name")} />
           <Button label="CREATE" type="submit" />
         </Form>
       </section>
+      {notUser && <ModalErrorUser />}
     </StyledModalCharCreate>
+  ) : (
+    <></>
   );
 }

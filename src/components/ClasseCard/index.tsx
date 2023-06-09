@@ -62,7 +62,13 @@ export function ClasseCard() {
           onClick={defineChar}
         />
       </section>
-      {modalCreate && <ModalCharCreate char={char.char} />}
+      {modalCreate && (
+        <ModalCharCreate
+          isOpen={modalCreate}
+          setIsOpen={setModalCreate}
+          char={char}
+        />
+      )}
     </StyledContainerClasses>
   );
 }
