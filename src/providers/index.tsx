@@ -2,6 +2,7 @@ import { ReactNode, createContext } from "react";
 import { AuthProvider } from "./AuthProvider";
 import { RaceProvider } from "./RacesProvider";
 import { ClassesProvider } from "./ClassesProvider";
+import { CharProvider } from "./CharProvider";
 interface MainproviderProps {
   children: ReactNode;
 }
@@ -14,7 +15,9 @@ export function MainProvider({ children }: MainproviderProps) {
     <MainContext.Provider value={{}}>
       <RaceProvider>
         <ClassesProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <CharProvider>{children}</CharProvider>
+          </AuthProvider>
         </ClassesProvider>
       </RaceProvider>
     </MainContext.Provider>

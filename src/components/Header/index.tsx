@@ -15,7 +15,7 @@ export function Header() {
   }
   return (
     <StyledHeader>
-      <h1>GODS & MYTHOLOGIES</h1>
+      <h1>D&D PROJECT</h1>
       <nav>
         <Button onClick={goToHome} label="HOME" />
         <Button onClick={goToLogin} label="LOGIN" />

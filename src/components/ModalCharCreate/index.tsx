@@ -11,6 +11,8 @@ import { api } from "../../services/api";
 import { useAuth } from "../../hooks/useAuth";
 import { ModalErrorUser } from "../ModalErrorUser";
 import { useEffect } from "react";
+import { useChar } from "../../hooks/useChar";
+import { useNavigate } from "react-router-dom";
 interface ModalCharCreateProps {
   char: CharCreate;
   isOpen: boolean;
@@ -30,6 +32,8 @@ export function ModalCharCreate({
   } = useForm<CharData>({
     resolver: zodResolver(schema),
   });
+  const navigate = useNavigate();
+  const { setMyChar } = useChar();
   async function createChar(data: CharData) {
     console.log(notUser);
     if (!user.name) {
@@ -40,7 +44,9 @@ export function ModalCharCreate({
       console.log(data);
       try {
         const response = await api.post("/chars", data);
-        console.log(response);
+        console.log(response.data);
+        setMyChar(response.data);
+        navigate("/user/char");
       } catch (error) {
         console.log(error);
       }

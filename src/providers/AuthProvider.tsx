@@ -10,12 +10,12 @@ interface Classe {
 interface AuthProviderProps {
   children: ReactNode;
 }
-interface Char {
+interface CharCreate {
   name: string;
   classe: Classe;
   race: Race;
 }
-interface User {
+export interface User {
   name: string;
   email: string;
   admin: boolean;
@@ -28,8 +28,8 @@ interface AuthContextValues {
   signIn: (data: LoginData) => void;
   createUser: (data: RegisterData) => void;
   loading: boolean;
-  chars: Char[];
-  setChars: React.Dispatch<React.SetStateAction<Char[]>>;
+  chars: CharCreate[];
+  setChars: React.Dispatch<React.SetStateAction<CharCreate[]>>;
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User>>;
   notUser: boolean;
@@ -41,7 +41,7 @@ export const AuthContext = createContext<AuthContextValues>(
 export function AuthProvider({ children }: AuthProviderProps) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [chars, setChars] = useState([] as Char[]);
+  const [chars, setChars] = useState([] as CharCreate[]);
   const [user, setUser] = useState({} as User);
   const [notUser, setNotUser] = useState(false);
   async function signIn(data: LoginData) {

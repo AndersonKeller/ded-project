@@ -11,6 +11,14 @@ export interface Stats {
   magic: string;
   magicMin?: number;
   magicMax?: number;
+  armor?: number;
+  critical?: number;
+  damageBonus?: number;
+  dodge?: number;
+  life?: number;
+  magicBonus?: number;
+  mana?: number;
+  precision?: number;
 }
 export interface Race {
   name: string;
